@@ -30,6 +30,19 @@ console.log("Js Linked correctly");
 // return "scissors"
 
 
+// return rock, paper or scissors with equal probability
+function getComputerChoice() {
+
+	// convert random range to integer ranging from 0 to 2 inclusive
+	let seed = Math.floor(Math.random() * 3);
+	
+	// use seed to pick choice
+	if (seed === 0) return "rock";
+	if (seed === 1) return "paper";
+	return "scissors";
+}
+
+
 // prompt user for choice of rock, paper or scissors until valid input encountered
 function getHumanChoice() {
 	let choice = "";
