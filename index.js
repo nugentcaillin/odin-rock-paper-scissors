@@ -34,6 +34,23 @@ console.log("Js Linked correctly");
 // if seed < 2/3 return "paper"
 // return "scissors"
 
+
+function playGame() {
+	let rounds = 5;
+	let humanScore = 0;
+	let computerScore = 0;
+	while (humanScore < 5 && computerScore < 5) {
+		console.log(`human's score: ${humanScore}, computer's score: ${computerScore}`);
+		[humanScore, computerScore] = playRound(humanScore, computerScore);
+	} 
+	if (humanScore === rounds) {
+		console.log("Congrats! You win");
+	} else {
+		console.log("Better luck next time..")
+	}
+} 
+
+
 function playRound(humanScore, computerScore) { 
 	let humanChoice = getHumanChoice();
 	let computerChoice = getComputerChoice();
