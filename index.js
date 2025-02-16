@@ -7,13 +7,18 @@ console.log("Js Linked correctly");
 // initialise rounds to 5
 // initialise humanScore, computerScore to zero 
 // while both humanScore and computerScore < rounds 
-// 		CALL getHumanChoice
-// 		CALL getComputerChoice 
+	// print humanScore and computerScore 
+	// CALL playRound(humanScore, computerScore) 
+// if player score is rounds, display win message
+// otherwise display loss message
+
+// ---playRound (humanScore, computerScore)
+// 		initialise humanChoice to CALL getHumanChoice
+// 		initialise computerChoice to CALL getComputerChoice 
 // 		if humanChoice === computerChoice, display draw message
 //		if player wins, increment player score by 1 and display message
 //		if computer wins, increment computer score by 1 and display message
-// if player score is rounds, display win message
-// otherwise display loss message
+//		return [humanScore, computerScore]
 
 // ---getHumanChoice
 // initialise choice to empty string
@@ -28,6 +33,29 @@ console.log("Js Linked correctly");
 // if seed < 1/3 return "rock"
 // if seed < 2/3 return "paper"
 // return "scissors"
+
+function playRound(humanScore, computerScore) { 
+	let humanChoice = getHumanChoice();
+	let computerChoice = getComputerChoice();
+	// handle draw condition
+	if (humanChoice === computerChoice) {
+		console.log("Draw")
+	} else {
+		// otherwise, decide winner, since draw condition accounted for if human does not win computer has won
+		if (
+			humanChoice === "rock" && computerChoice === "scissors" ||
+			humanChoice === "paper" && computerChoice === "rock" ||
+			humanChoice === "scissors" && computerChoice === "paper"
+		) {
+			console.log(`${humanChoice} beats ${computerChoice}, human wins`);
+			humanScore++;
+		} else {
+			computerScore++;
+			console.log(`${computerChoice} beats ${humanChoice}, computer wins`);
+		} 
+	} 
+	return [humanScore, computerScore];
+}
 
 
 // return rock, paper or scissors with equal probability
