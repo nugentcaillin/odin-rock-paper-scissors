@@ -51,8 +51,7 @@ function playGame() {
 } 
 
 
-function playRound(humanScore, computerScore) { 
-	let humanChoice = getHumanChoice();
+function playRound(humanChoice) { 
 	let computerChoice = getComputerChoice();
 	// handle draw condition
 	if (humanChoice === computerChoice) {
