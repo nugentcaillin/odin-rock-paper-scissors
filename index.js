@@ -1,76 +1,68 @@
-console.log("Js Linked correctly");
+const WIN_SCORE = 5;
+let humanScore = 0;
+let computerScore = 0;
+
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const message = document.querySelector("#message");
+const score = document.querySelector("#score"); 
+
+score.innerText 
+	= `Human score: ${humanScore}, Computer score: ${computerScore}`;
+
+rock.addEventListener('click', () => {
+	playRound("rock");
+})
 
 
-// pseudocode
+paper.addEventListener('click', () => {
+	playRound("paper");
+})
 
-// ---playGame
-// initialise rounds to 5
-// initialise humanScore, computerScore to zero 
-// while both humanScore and computerScore < rounds 
-	// print humanScore and computerScore 
-	// CALL playRound(humanScore, computerScore) 
-// if player score is rounds, display win message
-// otherwise display loss message
-
-// ---playRound (humanScore, computerScore)
-// 		initialise humanChoice to CALL getHumanChoice
-// 		initialise computerChoice to CALL getComputerChoice 
-// 		if humanChoice === computerChoice, display draw message
-//		if player wins, increment player score by 1 and display message
-//		if computer wins, increment computer score by 1 and display message
-//		return [humanScore, computerScore]
-
-// ---getHumanChoice
-// initialise choice to empty string
-// while choice is empty string
-//   	prompt user to pick rock, paper or scissors
-//		if prompt is equal to rock, paper or scissors, set choice to it
-// return choice
+scissors.addEventListener('click', () => {
+	playRound("scissors");
+})
 
 
-// ---getComputerChoice
-// initialise seed to random number between zero and 1
-// if seed < 1/3 return "rock"
-// if seed < 2/3 return "paper"
-// return "scissors"
-
-
-function playGame() {
-	let rounds = 5;
-	let humanScore = 0;
-	let computerScore = 0;
-	while (humanScore < 5 && computerScore < 5) {
-		console.log(`human's score: ${humanScore}, computer's score: ${computerScore}`);
-		[humanScore, computerScore] = playRound(humanScore, computerScore);
-	} 
-	if (humanScore === rounds) {
-		console.log("Congrats! You win");
-	} else {
-		console.log("Better luck next time..")
-	}
-} 
+ 
 
 
 function playRound(humanChoice) { 
+	
+	// prevent further play if game finished
+	if (humanScore === WIN_SCORE || computerScore === WIN_SCORE) return;
+
 	let computerChoice = getComputerChoice();
 	// handle draw condition
 	if (humanChoice === computerChoice) {
-		console.log("Draw")
+		message.textContent = "Draw";
 	} else {
-		// otherwise, decide winner, since draw condition accounted for if human does not win computer has won
+		// otherwise, decide winner, since draw condition accounted 
+		// for if human does not win computer has won
 		if (
 			humanChoice === "rock" && computerChoice === "scissors" ||
 			humanChoice === "paper" && computerChoice === "rock" ||
 			humanChoice === "scissors" && computerChoice === "paper"
 		) {
-			console.log(`${humanChoice} beats ${computerChoice}, human wins`);
+			message.textContent = 
+				`${humanChoice} beats ${computerChoice}, human wins`;
 			humanScore++;
 		} else {
+			message.textContent = 
+				`${computerChoice} beats ${humanChoice}, computer wins`;
 			computerScore++;
-			console.log(`${computerChoice} beats ${humanChoice}, computer wins`);
 		} 
-	} 
-	return [humanScore, computerScore];
+	}
+	score.innerText = 
+		`Human score: ${humanScore}, Computer score: ${computerScore}`;
+	// check for win
+	if (computerScore === WIN_SCORE) {
+		message.textContent = "Computer Wins!";
+	}
+	if (humanScore === WIN_SCORE) {
+		message.textContent = "Human Wins!";
+	}
 }
 
 
